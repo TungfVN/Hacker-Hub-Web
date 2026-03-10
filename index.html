@@ -34,8 +34,91 @@
               );
             background-size: var(--gap) var(--gap);
             background-attachment: fixed;
-            transition: background-color 0.5s ease;
+            transition: background-color 0.5s ease, color 0.3s ease, border-color 0.3s ease;
             scroll-behavior: smooth;
+        }
+
+        /* Theme Variables */
+        body.theme-default {
+            --accent-color: #cccccc;
+            --accent-gradient: linear-gradient(135deg, #888888, #aaaaaa);
+            --primary-color: #cccccc;
+            --primary-light: #e0e0e0;
+            --primary-dark: #666666;
+            --bg-color: #000000;
+            --card-bg: rgba(20, 20, 20, 0.9);
+            --text-color: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --hover-bg: rgba(255, 255, 255, 0.15);
+            --shadow-color: rgba(255, 255, 255, 0.2);
+        }
+
+        body.theme-yellow {
+            --accent-color: #ffcc00;
+            --accent-gradient: linear-gradient(135deg, #ffcc00, #ffdd44);
+            --primary-color: #ffcc00;
+            --primary-light: #ffdd44;
+            --primary-dark: #cc9900;
+            --bg-color: #1a1500;
+            --card-bg: rgba(30, 25, 10, 0.95);
+            --text-color: #ffffff;
+            --text-secondary: #ffdd99;
+            --border-color: rgba(255, 204, 0, 0.3);
+            --hover-bg: rgba(255, 204, 0, 0.15);
+            --shadow-color: rgba(255, 204, 0, 0.3);
+        }
+
+        body.theme-blue {
+            --accent-color: #4488ff;
+            --accent-gradient: linear-gradient(135deg, #4488ff, #66aaff);
+            --primary-color: #4488ff;
+            --primary-light: #66aaff;
+            --primary-dark: #3366cc;
+            --bg-color: #001122;
+            --card-bg: rgba(10, 20, 40, 0.95);
+            --text-color: #ffffff;
+            --text-secondary: #aaccff;
+            --border-color: rgba(68, 136, 255, 0.3);
+            --hover-bg: rgba(68, 136, 255, 0.15);
+            --shadow-color: rgba(68, 136, 255, 0.3);
+        }
+
+        body.theme-midnight {
+            --accent-color: #6633cc;
+            --accent-gradient: linear-gradient(135deg, #6633cc, #8855ee);
+            --primary-color: #6633cc;
+            --primary-light: #8855ee;
+            --primary-dark: #442299;
+            --bg-color: #0a0515;
+            --card-bg: rgba(20, 10, 30, 0.95);
+            --text-color: #ffffff;
+            --text-secondary: #cc99ff;
+            --border-color: rgba(102, 51, 204, 0.3);
+            --hover-bg: rgba(102, 51, 204, 0.15);
+            --shadow-color: rgba(102, 51, 204, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Theme Colors for Theme Options */
+        .theme-default .theme-color {
+            background: linear-gradient(135deg, #cccccc, #aaaaaa);
+        }
+
+        .theme-yellow .theme-color {
+            background: linear-gradient(135deg, #ffcc00, #ffaa00);
+        }
+
+        .theme-blue .theme-color {
+            background: linear-gradient(135deg, #4488ff, #0066cc);
+        }
+
+        .theme-midnight .theme-color {
+            background: linear-gradient(135deg, #6633cc, #330099);
         }
 
         /* Thanh điều hướng mới - trong suốt hơn */
@@ -51,7 +134,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--border-color);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -61,7 +144,7 @@
             backdrop-filter: blur(30px) saturate(250%);
             -webkit-backdrop-filter: blur(30px) saturate(250%);
             padding: 12px 50px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .logo {
@@ -82,8 +165,8 @@
 
         .logo:hover .logo-img {
             transform: scale(1.1) rotate(5deg);
-            filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
-            border-color: rgba(255, 255, 255, 0.3);
+            filter: brightness(1.2) drop-shadow(0 0 15px var(--shadow-color));
+            border-color: var(--primary-color);
         }
 
         /* Navigation Center */
@@ -94,7 +177,7 @@
             flex: 1;
         }
 
-        /* New Navigation với thiết kế trong suốt hơn */
+        /* Navigation Items with Icons */
         .radio-inputs {
             position: relative;
             display: flex;
@@ -110,7 +193,7 @@
             width: fit-content;
             font-size: 14px;
             gap: 0.4rem;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
         }
 
         .radio-inputs .radio {
@@ -128,6 +211,7 @@
             cursor: pointer;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             border-radius: 12px;
             border: none;
             padding: 0.8rem 1.4rem;
@@ -139,6 +223,13 @@
             overflow: hidden;
             min-width: 90px;
             position: relative;
+        }
+
+        .radio-inputs .radio .name svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            transition: all 0.3s ease;
         }
 
         .radio-inputs .radio .name::before {
@@ -157,11 +248,16 @@
         .radio-inputs .radio input:checked + .name {
             color: #ffffff;
             font-weight: 600;
-            background: rgba(255, 255, 255, 0.12);
+            background: var(--hover-bg);
             box-shadow: 
                 0 4px 15px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
             transform: translateY(-1px);
+            border: 1px solid var(--border-color);
+        }
+
+        .radio-inputs .radio input:checked + .name svg {
+            stroke: var(--primary-color);
         }
 
         .radio-inputs .radio input:checked + .name::before {
@@ -174,9 +270,13 @@
             transform: translateY(-2px);
         }
 
+        .radio-inputs .radio:hover .name svg {
+            stroke: var(--primary-color);
+        }
+
         .radio-inputs .radio:hover input:checked + .name {
             transform: translateY(-1px);
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--hover-bg);
         }
 
         /* Mobile Menu Button */
@@ -195,12 +295,12 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
             padding: 8px;
         }
 
         .mobile-menu-toggle:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--hover-bg);
             transform: scale(1.05);
         }
 
@@ -208,7 +308,7 @@
             display: block;
             width: 22px;
             height: 2px;
-            background: rgba(255, 255, 255, 0.8);
+            background: var(--text-color);
             margin: 2px 0;
             transition: all 0.3s ease;
             border-radius: 1px;
@@ -234,7 +334,7 @@
             width: 100%;
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(25px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-color);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             z-index: 999;
             transform: translateY(-100%);
@@ -256,8 +356,12 @@
         }
 
         .mobile-nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             padding: 15px 20px;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-color);
             text-decoration: none;
             border-radius: 10px;
             margin-bottom: 10px;
@@ -267,11 +371,21 @@
             font-weight: 500;
         }
 
+        .mobile-nav-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+        }
+
         .mobile-nav-item:hover,
         .mobile-nav-item.active {
-            background: rgba(255, 255, 255, 0.12);
+            background: var(--hover-bg);
             color: #ffffff;
             transform: translateY(-2px);
+        }
+
+        .mobile-nav-item.active svg {
+            stroke: var(--primary-color);
         }
 
         /* Theme Switcher mới */
@@ -294,26 +408,24 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
         }
 
         .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--hover-bg);
             transform: scale(1.05) translateY(-2px);
-            box-shadow: 
-                0 6px 20px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         .theme-toggle svg {
             width: 22px;
             height: 22px;
-            fill: rgba(255, 255, 255, 0.8);
+            stroke: var(--text-color);
             transition: all 0.3s ease;
         }
 
         .theme-toggle:hover svg {
-            fill: #ffffff;
+            stroke: var(--primary-color);
             transform: rotate(90deg);
         }
 
@@ -322,13 +434,13 @@
             top: 100%;
             right: 0;
             margin-top: 10px;
-            background: rgba(20, 20, 20, 0.95);
+            background: var(--card-bg);
             backdrop-filter: blur(20px);
             border-radius: 12px;
             padding: 12px;
             min-width: 160px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
@@ -350,10 +462,11 @@
             cursor: pointer;
             transition: all 0.2s ease;
             margin-bottom: 4px;
+            color: var(--text-color);
         }
 
         .theme-option:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--hover-bg);
         }
 
         .theme-color {
@@ -361,15 +474,16 @@
             height: 20px;
             border-radius: 50%;
             margin-right: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid var(--border-color);
             transition: all 0.3s ease;
         }
 
         .theme-option:hover .theme-color {
             transform: scale(1.1);
+            border-color: var(--primary-color);
         }
 
-        /* Các phần còn lại giữ nguyên */
+        /* Stars Effect */
         .stars {
             position: fixed;
             top: 0;
@@ -433,46 +547,6 @@
             }
         }
 
-        body.theme-default {
-            --accent-color: #cccccc;
-            --accent-gradient: linear-gradient(to right, #888888, #aaaaaa);
-            --primary-color: #cccccc;
-        }
-
-        body.theme-yellow {
-            --accent-color: #ffcc00;
-            --accent-gradient: linear-gradient(to right, #ffcc00, #ffdd44);
-            --primary-color: #ffcc00;
-        }
-
-        body.theme-blue {
-            --accent-color: #4488ff;
-            --accent-gradient: linear-gradient(to right, #4488ff, #66aaff);
-            --primary-color: #4488ff;
-        }
-
-        body.theme-midnight {
-            --accent-color: #6633cc;
-            --accent-gradient: linear-gradient(to right, #6633cc, #8855ee);
-            --primary-color: #6633cc;
-        }
-
-        .theme-default .theme-color {
-            background: linear-gradient(135deg, #cccccc, #aaaaaa);
-        }
-
-        .theme-yellow .theme-color {
-            background: linear-gradient(135deg, #ffcc00, #ffaa00);
-        }
-
-        .theme-blue .theme-color {
-            background: linear-gradient(135deg, #4488ff, #0066cc);
-        }
-
-        .theme-midnight .theme-color {
-            background: linear-gradient(135deg, #6633cc, #330099);
-        }
-
         /* Tab Content */
         .tab-content {
             display: none;
@@ -511,7 +585,7 @@
             font-weight: 900;
             letter-spacing: 3px;
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 10px var(--shadow-color);
             position: relative;
         }
 
@@ -529,14 +603,14 @@
 
         .hero p {
             font-size: 1.3em;
-            color: #cccccc;
+            color: var(--text-secondary);
             margin-bottom: 40px;
         }
 
         .hero-subtitle {
             font-size: 1.5em;
             margin-bottom: 20px;
-            color: #cccccc;
+            color: var(--text-secondary);
         }
 
         .cta-buttons {
@@ -558,7 +632,7 @@
             padding: 0.8em 1.3em 0.8em 0.9em;
             color: white;
             background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--border-color);
             letter-spacing: 0.05em;
             border-radius: 16px;
             text-decoration: none;
@@ -569,11 +643,10 @@
 
         .btn svg {
             margin-right: 8px;
-            transform: rotate(30deg);
             transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
             width: 20px;
             height: 20px;
-            fill: #e5e5e5;
+            stroke: currentColor;
         }
 
         .btn span {
@@ -584,12 +657,12 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
-            border-color: rgba(255,255,255,0.2);
+            border-color: var(--primary-color);
         }
 
         .btn:hover svg {
-            transform: translateX(5px) rotate(90deg);
-            fill: #ffffff;
+            transform: translateX(5px);
+            stroke: var(--primary-color);
         }
 
         .btn:hover span {
@@ -622,11 +695,11 @@
         .hacker-card {
             width: 320px;
             height: 240px;
-            background: rgba(20, 20, 20, 0.9);
+            background: var(--card-bg);
             border-radius: 16px;
             overflow: hidden;
             position: relative;
-            border: 1px solid rgba(100, 100, 100, 0.3);
+            border: 1px solid var(--border-color);
             transition: all 0.4s ease;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
@@ -657,8 +730,8 @@
 
         .hacker-card:hover {
             transform: translateY(-10px) scale(1.05);
-            border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 40px var(--shadow-color);
         }
 
         .card-image {
@@ -699,7 +772,7 @@
 
         .card-subtitle {
             font-size: 0.9em;
-            color: #cccccc;
+            color: var(--text-secondary);
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.4s ease 0.1s;
@@ -730,7 +803,7 @@
             opacity: 1;
         }
 
-        /* Stats Section với 10 mục */
+        /* Stats Section */
         .stats {
             padding: 80px 0;
             background: transparent;
@@ -747,6 +820,10 @@
             gap: 15px;
         }
 
+        .stats h2 svg {
+            stroke: var(--primary-color);
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -759,16 +836,16 @@
             padding: 25px 20px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
         .stat-item:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: var(--hover-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px var(--shadow-color);
         }
 
         .stat-number {
@@ -779,12 +856,12 @@
         }
 
         .stat-label {
-            color: #a0a0a0;
+            color: var(--text-secondary);
             font-size: 1.1em;
             margin-top: 10px;
         }
 
-        /* Premium Grid với 6 mục - Cải thiện căn chỉnh */
+        /* Premium Grid */
         .premium-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -794,9 +871,9 @@
         }
 
         .premium-card {
-            background: rgba(10, 10, 10, 0.8);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(136, 136, 136, 0.3);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 40px;
             transition: all 0.3s;
@@ -825,14 +902,14 @@
 
         .premium-card:hover {
             transform: translateY(-10px);
-            border-color: #ffffff;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 30px var(--shadow-color);
         }
 
         .premium-icon {
             font-size: 3em;
             margin-bottom: 20px;
-            color: #cccccc;
+            color: var(--primary-color);
         }
 
         .premium-card h3 {
@@ -842,17 +919,17 @@
         }
 
         .premium-card p {
-            color: #a0a0a0;
+            color: var(--text-secondary);
             line-height: 1.6;
             flex-grow: 1;
         }
 
-        /* Các phần còn lại giữ nguyên */
+        /* Credits Section */
         .credits-section {
             padding: 80px 0;
             background: transparent;
             text-align: center;
-            border-top: 1px solid rgba(136, 136, 136, 0.2);
+            border-top: 1px solid var(--border-color);
         }
 
         .credits-section h2 {
@@ -865,9 +942,13 @@
             gap: 15px;
         }
 
+        .credits-section h2 svg {
+            stroke: var(--primary-color);
+        }
+
         .credits-section p {
             font-size: 1.2em;
-            color: #a0a0a0;
+            color: var(--text-secondary);
             margin-bottom: 40px;
         }
 
@@ -880,8 +961,8 @@
         }
 
         .credit-card {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(136, 136, 136, 0.3);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 30px;
             transition: all 0.3s ease;
@@ -892,8 +973,8 @@
 
         .credit-card:hover {
             transform: translateY(-5px);
-            border-color: #ffffff;
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px var(--shadow-color);
         }
 
         .credit-avatar {
@@ -923,7 +1004,7 @@
         }
 
         .credit-link {
-            color: #a0a0a0;
+            color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.3s ease;
             display: flex;
@@ -947,10 +1028,14 @@
             gap: 15px;
         }
 
+        .premium h2 svg {
+            stroke: var(--primary-color);
+        }
+
         .premium-subtitle {
             text-align: center;
             margin-bottom: 60px;
-            color: #a0a0a0;
+            color: var(--text-secondary);
             font-size: 1.2em;
         }
 
@@ -965,11 +1050,15 @@
         .pricing-section h3 {
             font-size: 2.5em;
             margin-bottom: 40px;
-            color: #cccccc;
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
+        }
+
+        .pricing-section h3 svg {
+            stroke: var(--primary-color);
         }
 
         .pricing-grid {
@@ -985,9 +1074,9 @@
         /* Fixed Flip Card Styles */
         .flip-card {
             background-color: transparent;
-            width: 250px;
-            height: 320px;
-            perspective: 1000px;
+            width: 280px;
+            height: 360px;
+            perspective: 1500px;
             font-family: sans-serif;
             margin: 0;
             position: relative;
@@ -1009,7 +1098,7 @@
             border-radius: 20px;
             font-size: 0.9em;
             font-weight: bold;
-            z-index: 10;
+            z-index: 20;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -1041,24 +1130,24 @@
             position: absolute;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             width: 100%;
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border: 2px solid var(--primary-color);
             border-radius: 1rem;
-            padding: 20px;
+            padding: 25px;
             box-sizing: border-box;
         }
 
         .flip-card-front {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-            color: var(--primary-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            justify-content: flex-start;
         }
 
         .flip-card-back {
-            background: linear-gradient(135deg, var(--primary-color) 0%, rgba(255,255,255,0.2) 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
             color: white;
             transform: rotateY(180deg);
             display: flex;
@@ -1103,7 +1192,7 @@
 
         .buy-btn {
             background: white;
-            color: var(--primary-color);
+            color: var(--primary-dark);
             border: none;
             padding: 12px 24px;
             border-radius: 25px;
@@ -1112,11 +1201,14 @@
             margin-top: 15px;
             transition: all 0.3s ease;
             font-size: 1em;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .buy-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+            background: var(--primary-light);
         }
 
         /* Updated Card Header Layout */
@@ -1132,6 +1224,7 @@
             font-weight: 900;
             text-align: left;
             margin: 0;
+            color: #ffffff;
         }
 
         .plan-price-new {
@@ -1139,6 +1232,7 @@
             font-weight: bold;
             text-align: right;
             margin: 0;
+            color: var(--primary-color);
         }
 
         /* Script Tab */
@@ -1153,12 +1247,16 @@
             gap: 15px;
         }
 
+        .script h2 svg {
+            stroke: var(--primary-color);
+        }
+
         .card {
             padding: 1rem;
             overflow: hidden;
-            border: 1px solid #c5c5c5;
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            background-color: #d9d9d92f;
+            background-color: rgba(217, 217, 217, 0.05);
             backdrop-filter: blur(8px);
             min-width: 344px;
             max-width: 600px;
@@ -1170,7 +1268,7 @@
             gap: 1rem;
             position: relative;
             z-index: 10;
-            border: 0.5px solid #525252;
+            border: 0.5px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
         }
@@ -1224,7 +1322,7 @@
         }
         .copy_toggle:hover {
             background-color: #2a2d2e;
-            border-color: #ffffff;
+            border-color: var(--primary-color);
         }
         .copy_toggle > svg {
             width: 20px;
@@ -1338,11 +1436,15 @@
         .supported-games h3 {
             font-size: 2em;
             margin-bottom: 40px;
-            color: #cccccc;
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
+        }
+
+        .supported-games h3 svg {
+            stroke: var(--primary-color);
         }
 
         .games-grid {
@@ -1360,7 +1462,7 @@
             height: 320px;
             overflow: hidden;
             border-radius: 16px;
-            background: #3d3c3d;
+            background: var(--card-bg);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: all 0.4s ease;
         }
@@ -1385,7 +1487,7 @@
 
         .game-card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 40px var(--shadow-color);
         }
 
         .game-image {
@@ -1415,7 +1517,7 @@
         }
 
         .game-card:hover .game-content {
-            background: rgba(50, 49, 50, 0.98);
+            background: var(--card-bg);
         }
 
         .game-title {
@@ -1447,16 +1549,20 @@
             gap: 15px;
         }
 
+        .faq h2 svg {
+            stroke: var(--primary-color);
+        }
+
         .faq-subtitle {
             text-align: center;
             margin-bottom: 60px;
-            color: #a0a0a0;
+            color: var(--text-secondary);
             font-size: 1.2em;
         }
 
         .faq-item {
             margin-bottom: 30px;
-            border-bottom: 1px solid rgba(136, 136, 136, 0.2);
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 20px;
             max-width: 1000px;
             margin-left: auto;
@@ -1473,8 +1579,19 @@
             align-items: center;
         }
 
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5em;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '−';
+        }
+
         .faq-answer {
-            color: #a0a0a0;
+            color: var(--text-secondary);
             line-height: 1.6;
             display: none;
         }
@@ -1492,11 +1609,15 @@
             text-align: center;
             font-size: 2.5em;
             margin-bottom: 40px;
-            color: #cccccc;
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
+        }
+
+        .features-section h3 svg {
+            stroke: var(--primary-color);
         }
 
         .features-grid {
@@ -1508,9 +1629,9 @@
         }
 
         .feature-card {
-            background: rgba(10, 10, 10, 0.8);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(136, 136, 136, 0.3);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 40px;
             transition: all 0.3s;
@@ -1539,14 +1660,14 @@
 
         .feature-card:hover {
             transform: translateY(-10px);
-            border-color: #ffffff;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 30px var(--shadow-color);
         }
 
         .feature-icon {
             font-size: 3em;
             margin-bottom: 20px;
-            color: #cccccc;
+            color: var(--primary-color);
         }
 
         .feature-card h3 {
@@ -1556,7 +1677,7 @@
         }
 
         .feature-card p {
-            color: #a0a0a0;
+            color: var(--text-secondary);
             line-height: 1.6;
             flex-grow: 1;
         }
@@ -1566,7 +1687,7 @@
             padding: 80px 0;
             background: transparent;
             text-align: center;
-            border-top: 1px solid rgba(136, 136, 136, 0.2);
+            border-top: 1px solid var(--border-color);
             margin-top: 60px;
         }
 
@@ -1580,9 +1701,13 @@
             gap: 15px;
         }
 
+        .rating-section h2 svg {
+            stroke: var(--primary-color);
+        }
+
         .rating-section p {
             font-size: 1.2em;
-            color: #a0a0a0;
+            color: var(--text-secondary);
             margin-bottom: 40px;
         }
 
@@ -1624,80 +1749,11 @@
             text-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
         }
 
-        /* Partner Section */
-        .partner-section {
-            padding: 80px 0;
-            background: transparent;
-            text-align: center;
-            border-top: 1px solid rgba(136, 136, 136, 0.2);
-        }
-
-        .partner-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .partner-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .partner-info {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(136, 136, 136, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            width: 100%;
-        }
-
-        .partner-info:hover {
-            transform: translateY(-5px);
-            border-color: #ffffff;
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
-        }
-
-        .partner-name {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .partner-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-
-        .partner-link:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .partner-email {
-            color: #a0a0a0;
-            font-size: 1.1em;
-        }
-
         footer {
             padding: 40px 50px;
             background: #0a0a0a;
             text-align: center;
-            border-top: 1px solid rgba(136, 136, 136, 0.2);
+            border-top: 1px solid var(--border-color);
         }
 
         .footer-content {
@@ -1716,7 +1772,7 @@
         }
 
         .footer-section h3 {
-            color: #cccccc;
+            color: #ffffff;
             margin-bottom: 20px;
             font-size: 1.3em;
         }
@@ -1730,23 +1786,23 @@
         }
 
         .footer-links a {
-            color: #a0a0a0;
+            color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.3s;
         }
 
         .footer-links a:hover {
-            color: #cccccc;
+            color: var(--primary-color);
         }
 
         .footer-bottom {
             margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid rgba(136, 136, 136, 0.2);
+            border-top: 1px solid var(--border-color);
             color: #666;
         }
 
-        /* Get Key Button - Đã được làm to bằng nút Get Started */
+        /* Get Key Button */
         .get-key-container {
             text-align: center;
             margin-top: 40px;
@@ -1763,7 +1819,7 @@
             padding: 0.8em 1.3em 0.8em 0.9em;
             color: white;
             background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--border-color);
             letter-spacing: 0.05em;
             border-radius: 16px;
             text-decoration: none;
@@ -1774,11 +1830,10 @@
 
         .btn-key svg {
             margin-right: 8px;
-            transform: rotate(0deg);
             transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
             width: 20px;
             height: 20px;
-            fill: #e5e5e5;
+            stroke: currentColor;
         }
 
         .btn-key span {
@@ -1789,12 +1844,12 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
-            border-color: rgba(255,255,255,0.2);
+            border-color: var(--primary-color);
         }
 
         .btn-key:hover svg {
-            transform: translateX(5px) rotate(15deg);
-            fill: #ffffff;
+            transform: translateX(5px);
+            stroke: var(--primary-color);
         }
 
         .btn-key:hover span {
@@ -1867,8 +1922,8 @@
 
         .footer-logo:hover {
             transform: scale(1.1) rotate(5deg);
-            filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
-            border-color: rgba(255, 255, 255, 0.3);
+            filter: brightness(1.2) drop-shadow(0 0 15px var(--shadow-color));
+            border-color: var(--primary-color);
         }
 
         .footer-brand {
@@ -1878,13 +1933,13 @@
         }
 
         .footer-brand h3 {
-            color: #cccccc;
+            color: #ffffff;
             margin-bottom: 5px;
             font-size: 1.5em;
         }
 
         .footer-brand p {
-            color: #a0a0a0;
+            color: var(--text-secondary);
             font-size: 0.9em;
         }
 
@@ -1952,6 +2007,7 @@
             
             .flip-card {
                 width: 280px;
+                height: 340px;
             }
             
             .popular-badge {
@@ -2012,23 +2068,50 @@
         
         <!-- Navigation Center -->
         <div class="nav-center">
-            <!-- Updated Navigation với thiết kế trong suốt -->
+            <!-- Updated Navigation với thiết kế trong suốt và icons -->
             <div class="radio-inputs">
                 <div class="radio">
                     <input type="radio" id="nav-home" name="nav-radio" checked>
-                    <label for="nav-home" class="name">Home</label>
+                    <label for="nav-home" class="name">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
+                            <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        </svg>
+                        Home
+                    </label>
                 </div>
                 <div class="radio">
                     <input type="radio" id="nav-premium" name="nav-radio">
-                    <label for="nav-premium" class="name">Premium</label>
+                    <label for="nav-premium" class="name">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/>
+                            <path d="M12 18V6"/>
+                        </svg>
+                        Premium
+                    </label>
                 </div>
                 <div class="radio">
                     <input type="radio" id="nav-script" name="nav-radio">
-                    <label for="nav-script" class="name">Script</label>
+                    <label for="nav-script" class="name">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m10 9-3 3 3 3"/>
+                            <path d="m14 15 3-3-3-3"/>
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        </svg>
+                        Script
+                    </label>
                 </div>
                 <div class="radio">
                     <input type="radio" id="nav-faq" name="nav-radio">
-                    <label for="nav-faq" class="name">FAQ</label>
+                    <label for="nav-faq" class="name">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                            <line x1="12" x2="12" y1="16" y2="12"/>
+                            <line x1="12" x2="12.01" y1="8" y2="8"/>
+                        </svg>
+                        FAQ
+                    </label>
                 </div>
             </div>
         </div>
@@ -2072,10 +2155,37 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobile-menu">
         <div class="mobile-nav-items">
-            <a href="#" class="mobile-nav-item active" data-tab="home">Home</a>
-            <a href="#" class="mobile-nav-item" data-tab="premium">Premium</a>
-            <a href="#" class="mobile-nav-item" data-tab="script">Script</a>
-            <a href="#" class="mobile-nav-item" data-tab="faq">FAQ</a>
+            <a href="#" class="mobile-nav-item active" data-tab="home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
+                    <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                </svg>
+                Home
+            </a>
+            <a href="#" class="mobile-nav-item" data-tab="premium">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/>
+                    <path d="M12 18V6"/>
+                </svg>
+                Premium
+            </a>
+            <a href="#" class="mobile-nav-item" data-tab="script">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m10 9-3 3 3 3"/>
+                    <path d="m14 15 3-3-3-3"/>
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                </svg>
+                Script
+            </a>
+            <a href="#" class="mobile-nav-item" data-tab="faq">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                    <line x1="12" x2="12" y1="16" y2="12"/>
+                    <line x1="12" x2="12.01" y1="8" y2="8"/>
+                </svg>
+                FAQ
+            </a>
         </div>
     </div>
 
