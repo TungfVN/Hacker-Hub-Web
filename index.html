@@ -2719,8 +2719,15 @@
             option.addEventListener('click', function() {
                 const theme = this.getAttribute('data-theme');
                 document.body.className = `theme-${theme}`;
+                
+                // Lưu theme vào localStorage
+                localStorage.setItem('selectedTheme', theme);
             });
         });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('selectedTheme') || 'default';
+        document.body.className = `theme-${savedTheme}`;
 
         // Star rating functionality
         const starInputs = document.querySelectorAll('.rating input');
