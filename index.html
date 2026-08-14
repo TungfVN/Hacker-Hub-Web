@@ -336,8 +336,6 @@
             position: relative;
         }
 
-/* no tab shrink on scroll */
-
         .radio-inputs .radio .name svg {
             width: 18px;
             height: 18px;
@@ -410,8 +408,6 @@
             animation: indicatorSlide 0.4s cubic-bezier(0.16,1,0.3,1);
         }
 
-/* underline stays same on scroll */
-
         @keyframes indicatorSlide {
             0% { width: 0; opacity: 0; }
             100% { width: 60%; opacity: 1; }
@@ -423,18 +419,19 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
             backdrop-filter: blur(10px);
-            box-shadow: 
+            box-shadow:
                 0 4px 15px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
             padding: 8px;
+            flex-shrink: 0;
         }
 
         .mobile-menu-toggle:hover {
@@ -447,7 +444,7 @@
             width: 22px;
             height: 2px;
             background: var(--text-color);
-            margin: 2px 0;
+            margin: 2.5px 0;
             transition: all 0.3s ease;
             border-radius: 1px;
         }
@@ -461,28 +458,32 @@
         }
 
         .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
-        /* Mobile Menu */
+        /* Mobile Menu - Enhanced */
         .mobile-menu {
             position: fixed;
-            top: 72px;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(25px);
-            border-top: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            width: calc(100% - 32px);
+            max-width: 400px;
+            background: rgba(10, 10, 12, 0.92);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--glow-1) inset;
             z-index: 999;
-            transform: translateY(-100%);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 12px;
         }
 
         .mobile-menu.active {
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
             opacity: 1;
             visibility: visible;
         }
@@ -490,36 +491,46 @@
         .mobile-nav-items {
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            gap: 6px;
         }
 
         .mobile-nav-item {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 15px 20px;
-            color: var(--text-color);
+            gap: 12px;
+            padding: 14px 16px;
+            color: var(--text-secondary);
             text-decoration: none;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
             text-align: center;
             font-weight: 500;
+            font-size: 1.05em;
+            border: 1px solid transparent;
         }
 
         .mobile-nav-item svg {
             width: 20px;
             height: 20px;
             stroke: currentColor;
+            flex-shrink: 0;
+            transition: stroke 0.3s ease;
         }
 
         .mobile-nav-item:hover,
         .mobile-nav-item.active {
             background: var(--hover-bg);
             color: #ffffff;
-            transform: translateY(-2px);
+            transform: scale(1.02);
+            border-color: var(--border-color);
+        }
+
+        .mobile-nav-item.active {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px var(--glow-1);
         }
 
         .mobile-nav-item.active svg {
@@ -530,17 +541,18 @@
         .theme-switcher {
             position: relative;
             display: inline-block;
+            flex-shrink: 0;
         }
 
         .theme-toggle {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.08);
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 12px;
             backdrop-filter: blur(10px);
-            box-shadow: 
+            box-shadow:
                 0 4px 15px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -564,8 +576,8 @@
         }
 
         .theme-toggle svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             stroke: var(--text-color);
             transition: all 0.3s ease;
         }
@@ -1306,7 +1318,7 @@
             flex-grow: 1;
         }
 
-        /* Credits Section */
+        /* Credits Section - Enhanced */
         .credits-section {
             padding: 80px 0;
             background: transparent;
@@ -1331,71 +1343,137 @@
         .credits-section p {
             font-size: 1.2em;
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .credits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            max-width: 1000px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
         .credit-card {
             background: var(--card-bg);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 30px;
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 30px 24px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: center;
             gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .credit-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background: radial-gradient(ellipse at 70% 20%, var(--glow-1) 0%, transparent 65%);
+            opacity: 0.4;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .credit-card:hover::after {
+            opacity: 1;
         }
 
         .credit-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px) scale(1.02);
             border-color: var(--primary-color);
-            box-shadow: 0 10px 25px var(--shadow-color);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px var(--shadow-color), 0 0 30px var(--glow-1);
         }
 
         .credit-avatar {
-            width: 80px;
-            height: 80px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--primary-color);
+            border: 2px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .credit-card:hover .credit-avatar {
+            border-color: var(--primary-color);
+            transform: scale(1.08) rotate(-3deg);
+            box-shadow: 0 0 25px var(--shadow-color);
         }
 
         .credit-info {
             text-align: left;
             flex: 1;
+            position: relative;
+            z-index: 1;
         }
 
         .credit-name {
-            font-size: 1.3em;
-            font-weight: bold;
+            font-size: 1.2em;
+            font-weight: 700;
             color: #ffffff;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            letter-spacing: 0.02em;
         }
 
         .credit-role {
             color: var(--primary-color);
             margin-bottom: 10px;
             font-weight: 500;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
         }
 
         .credit-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 10px;
+            border-radius: 10px;
+            background: var(--hover-bg);
+            border: 1px solid var(--border-color);
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 6px;
+        }
+
+        .credit-link svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .credit-link:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: var(--primary-color);
             color: #ffffff;
+            transform: translateX(4px);
+            box-shadow: 0 0 20px var(--glow-1);
+        }
+
+        .credit-link:hover svg {
+            transform: translateX(3px) rotate(-10deg);
+            stroke: var(--primary-color);
+        }
+
+        .credit-link .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
         }
 
         /* Premium Tab */
@@ -2507,11 +2585,24 @@
             font-size: 0.9em;
         }
 
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .premium-grid { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 768px) {
             nav {
-                padding: 12px 20px;
-                flex-direction: row;
-                gap: 15px;
+                padding: 10px 14px;
+                width: calc(100% - 24px);
+                top: 12px;
+                border-radius: 16px;
+                gap: 8px;
+            }
+
+            nav.scrolled {
+                top: 6px;
+                border-radius: 14px;
+                padding: 8px 14px;
             }
 
             .nav-center {
@@ -2520,14 +2611,52 @@
 
             .mobile-menu-toggle {
                 display: flex;
+                width: 38px;
+                height: 38px;
+            }
+
+            .theme-toggle {
+                width: 38px;
+                height: 38px;
+            }
+
+            .theme-toggle svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .logo-img {
+                width: 38px;
+                height: 38px;
             }
 
             .hero h1 {
-                font-size: 3em;
+                font-size: 2.8em;
+            }
+
+            .hero h1::before {
+                filter: blur(12px);
+            }
+
+            .hero p {
+                font-size: 1em;
+                padding: 0 10px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1em;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+
+            .hero-stat .num {
+                font-size: 1.5em;
             }
 
             .tab-content {
-                padding: 120px 20px 50px;
+                padding: 100px 16px 40px;
             }
 
             .footer-content {
@@ -2549,8 +2678,8 @@
             }
 
             .hacker-card {
-                width: 280px;
-                height: 210px;
+                width: 260px;
+                height: 200px;
             }
 
             .games-grid {
@@ -2581,11 +2710,6 @@
                 padding: 6px 15px;
             }
 
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
             .premium-grid {
                 grid-template-columns: 1fr;
             }
@@ -2593,6 +2717,7 @@
             .credit-card {
                 flex-direction: column;
                 text-align: center;
+                padding: 24px 16px;
             }
 
             .credit-info {
@@ -2607,6 +2732,21 @@
             .footer-brand {
                 align-items: center;
             }
+
+            .mobile-menu {
+                top: 72px;
+                width: calc(100% - 24px);
+                border-radius: 20px;
+                padding: 10px;
+            }
+
+            .mobile-nav-item {
+                padding: 12px 14px;
+                font-size: 0.95em;
+            }
+
+            .about-grid { grid-template-columns: 1fr; }
+            .credits-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
@@ -2620,14 +2760,31 @@
                 height: 18px;
                 margin-right: 6px;
             }
-        }
-    
-        @media (max-width: 768px) {
-            .about-grid {
-                grid-template-columns: 1fr;
+
+            nav {
+                padding: 8px 12px;
+                gap: 6px;
+            }
+
+            .logo-img {
+                width: 34px;
+                height: 34px;
+            }
+
+            .mobile-menu-toggle {
+                width: 34px;
+                height: 34px;
+            }
+
+            .theme-toggle {
+                width: 34px;
+                height: 34px;
+            }
+
+            .hero h1 {
+                font-size: 2.2em;
             }
         }
-    
 
         /* How to Get Your Key - FAQ */
         .key-guide {
@@ -3011,44 +3168,54 @@
         </div>
 
         <!-- Credits Section -->
-<div class="credits-section">
-    <h2>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pulse">
-            <path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"></path>
-            <path d="m8 6 2-2"></path>
-            <path d="m18 16 2-2"></path>
-            <path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"></path>
-            <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path>
-            <path d="m15 5 4 4"></path>
-        </svg>
-        Credits
-    </h2>
-    <p>Thank you to everyone who has contributed to making Hacker Hub possible</p>
-    
-    <div class="credits-grid">
-        <div class="credit-card">
-            <img class="credit-avatar" src="https://sf-static.upanhlaylink.com/img/image_20260315dca794d5314fe0fa161a0b2e7c1f978a.jpg" alt="! MT">
-            <div class="credit-info">
-                <div class="credit-name">! MT| @its_mtung</div>
-                <div class="credit-role">Owner</div>
-                <a href="https://guns.lol/tungfvn" target="_blank" class="credit-link">
-                    Visit ☑
-                </a>
+        <div class="credits-section">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pulse">
+                    <path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"></path>
+                    <path d="m8 6 2-2"></path>
+                    <path d="m18 16 2-2"></path>
+                    <path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"></path>
+                    <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path>
+                    <path d="m15 5 4 4"></path>
+                </svg>
+                Credits
+            </h2>
+            <p>Thank you to everyone who has contributed to making Hacker Hub possible</p>
+            
+            <div class="credits-grid">
+                <div class="credit-card">
+                    <img class="credit-avatar" src="https://sf-static.upanhlaylink.com/img/image_20260315dca794d5314fe0fa161a0b2e7c1f978a.jpg" alt="! MT">
+                    <div class="credit-info">
+                        <div class="credit-name">! MT| @its_mtung</div>
+                        <div class="credit-role">Owner</div>
+                        <a href="https://guns.lol/tungfvn" target="_blank" class="credit-link" aria-label="Visit Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            <span class="visually-hidden">Visit</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="credit-card">
+                    <img class="credit-avatar" src="https://sf-static.upanhlaylink.com/img/image_202607308da3c1463c807afd6b40429188f28dc3.jpg" alt="Torawa Noya">
+                    <div class="credit-info">
+                        <div class="credit-name">Torawa Noya | @torawa_noya</div>
+                        <div class="credit-role">Manager</div>
+                        <a href="https://torawanoya.github.io/" target="_blank" class="credit-link" aria-label="Visit Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            <span class="visually-hidden">Visit</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="credit-card">
-            <img class="credit-avatar" src="https://sf-static.upanhlaylink.com/img/image_202607308da3c1463c807afd6b40429188f28dc3.jpg" alt="Torawa Noya">
-            <div class="credit-info">
-                <div class="credit-name">Torawa Noya | @torawa_noya</div>
-                <div class="credit-role">Manager</div>
-                <a href="https://torawanoya.github.io/" target="_blank" class="credit-link">
-                    Visit ☑
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 
         <!-- Star Rating Section -->
         <div class="rating-section">
